@@ -1,0 +1,42 @@
+:root {
+  --nav-height: 64px;
+  --background-color: #0b0b0b;
+  --light-color: #ffffff;
+  --body-font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
+/* Technowp header (keeps layout similar to existing header but scoped to this block)
+   This is a standalone block — we do NOT modify blocks/header. */
+
+.technowp-header {
+  position: fixed;
+  inset: 0 auto auto 0;
+  width: 100%;
+  z-index: 999;
+  background: var(--background-color);
+  color: var(--light-color);
+  font-family: var(--body-font-family);
+}
+
+.technowp-header .nav-inner {
+  max-width: 1248px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  height: var(--nav-height);
+}
+
+.technowp-header .brand img { height: 40px; }
+
+.technowp-header .nav-sections { display: none; }
+.technowp-header .nav-tools { display: flex; gap: 12px; align-items:center; }
+
+.technowp-header .hamburger { background: transparent; border: 0; color: inherit; }
+
+@media (min-width:900px) {
+  .technowp-header .hamburger { display: none; }
+  .technowp-header .nav-sections { display: block; }
+  .technowp-header .nav-sections ul { display:flex; gap:24px; list-style:none; margin:0; padding:0; }
+}
