@@ -1,0 +1,103 @@
+.pricing {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+.plan {
+  display: flex;
+  flex-direction: column;
+  padding: 44px 36px;
+  border: 1px solid var(--tw-line);
+  border-radius: var(--tw-radius);
+  background: #fff;
+}
+
+.plan h3 {
+  margin: 0 0 20px;
+  font-size: 22px;
+}
+
+.plan-price {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 0 0 28px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--tw-line);
+}
+
+.plan-amount {
+  color: var(--tw-primary);
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.plan-period {
+  color: var(--tw-muted);
+  font-size: 15px;
+}
+
+.plan-features {
+  flex: 1;
+  margin: 0 0 32px;
+  padding: 0;
+  list-style: none;
+}
+
+.plan-features li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 14px;
+  color: var(--tw-ink);
+}
+
+.plan-features .tw-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--tw-primary);
+}
+
+.plan-cta a.button:any-link {
+  width: 100%;
+  box-sizing: border-box;
+  background: transparent;
+  color: var(--tw-primary);
+}
+
+.plan-cta a.button:any-link:hover {
+  background: var(--tw-primary);
+  border-color: var(--tw-primary);
+  color: #fff;
+}
+
+.plan.featured {
+  border-color: var(--tw-navy);
+  background: var(--tw-navy);
+  box-shadow: var(--tw-shadow);
+}
+
+.plan.featured h3 { color: #fff; }
+.plan.featured .plan-price { border-color: rgba(255 255 255 / 18%); }
+.plan.featured .plan-amount { color: #fff; }
+.plan.featured .plan-period { color: rgba(255 255 255 / 70%); }
+.plan.featured .plan-features li { color: rgba(255 255 255 / 88%); }
+.plan.featured .plan-features .tw-icon { color: var(--tw-accent); }
+
+.plan.featured .plan-cta a.button:any-link {
+  background: var(--tw-primary);
+  color: #fff;
+}
+
+.plan.featured .plan-cta a.button:any-link:hover {
+  background: #fff;
+  border-color: #fff;
+  color: var(--tw-navy);
+}
+
+@media (width < 1000px) {
+  .pricing { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
+}
