@@ -1,6 +1,6 @@
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 24px;
   margin: 0;
   padding: 0;
@@ -8,35 +8,42 @@
 }
 
 .service {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 280px;
   margin: 0;
-  padding: 40px 28px 36px;
-  border: 1px solid var(--tw-line);
-  border-radius: var(--tw-radius);
+  padding: 28px 26px 24px;
+  border: 1px solid #e1e1e1;
   background: #fff;
-  transition: background-color 0.25s, border-color 0.25s, color 0.25s;
+  box-sizing: border-box;
 }
 
 .service-icon {
-  display: grid;
-  place-items: center;
-  width: 68px;
-  height: 68px;
-  margin-bottom: 24px;
-  border-radius: 50%;
-  background: var(--tw-soft);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: auto;
+  height: auto;
+  margin: 0 0 28px;
+  background: transparent;
+  border-radius: 0;
   color: var(--tw-primary);
-  transition: background-color 0.25s, color 0.25s;
 }
 
 .service-icon .tw-icon {
-  width: 30px;
-  height: 30px;
+  width: 54px;
+  height: 54px;
+  stroke-width: 2.2;
 }
 
 .services-grid h3 {
-  margin: 0 0 10px;
-  font-size: 20px;
+  margin: 0 0 18px;
+  font-size: clamp(2rem, 1.8vw, 2.6rem);
+  line-height: 1.2;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: #111;
 }
 
 .service-link:any-link {
@@ -44,41 +51,25 @@
   text-decoration: none;
 }
 
-/* whole card is clickable */
 .service-link::after {
-  content: '';
-  position: absolute;
-  inset: 0;
+  display: none;
 }
 
 .services-grid p {
   margin: 0;
-  color: var(--tw-muted);
-  font-size: 15px;
-  transition: color 0.25s;
-}
-
-.service:hover,
-.service:focus-within {
-  border-color: var(--tw-primary);
-  background: var(--tw-primary);
-}
-
-.service:hover h3,
-.service:focus-within h3,
-.service:hover p,
-.service:focus-within p { color: #fff; }
-
-.service:hover .service-icon,
-.service:focus-within .service-icon {
-  background: rgba(255 255 255 / 18%);
-  color: #fff;
+  color: #1f1f1f;
+  font-size: clamp(1.2rem, 1.1vw, 1.6rem);
+  line-height: 1.5;
 }
 
 @media (width < 1000px) {
-  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .services-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (width < 560px) {
-  .services-grid { grid-template-columns: 1fr; }
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
 }
