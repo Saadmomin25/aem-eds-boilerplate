@@ -1,0 +1,38 @@
+.counters {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.counter {
+  padding: 8px 24px;
+  border-left: 1px solid var(--tw-line);
+  text-align: center;
+}
+
+.counter:first-child { border-left: 0; }
+
+.counters .counter-value {
+  margin: 0;
+  color: var(--tw-navy);
+  font-size: clamp(40px, 5vw, 60px);
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.counters .counter-label {
+  margin: 8px 0 0;
+  color: var(--tw-muted);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+@media (width < 900px) {
+  .counters { grid-template-columns: 1fr 1fr; row-gap: 40px; }
+  .counter:nth-child(odd) { border-left: 0; }
+}
+
+@media (width < 480px) {
+  .counters { grid-template-columns: 1fr; }
+  .counter { border-left: 0; }
+}
