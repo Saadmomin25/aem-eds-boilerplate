@@ -3,7 +3,9 @@
   grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
   gap: 0;
   align-items: stretch;
+  width: min(100%, 1500px);
   min-height: 720px;
+  margin: 0 auto;
   background: #f4f4f4;
   overflow: hidden;
 }
