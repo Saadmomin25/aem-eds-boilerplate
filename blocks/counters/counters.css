@@ -54,6 +54,79 @@
   font-weight: 500;
 }
 
+/* Match the actual Elementor counter markup from the provided HTML */
+.elementor-widget-wcounterw .elementor-widget-container {
+  width: 100%;
+}
+
+.elementor-widget-wcounterw .witr_counter_single {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 290px;
+  padding: 0 18px;
+  text-align: center;
+  background: transparent;
+  border: 0;
+}
+
+.elementor-widget-wcounterw .witr_counter_icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 120px;
+  color: #0b5ed7;
+  margin-bottom: 8px;
+}
+
+.elementor-widget-wcounterw .witr_counter_icon i {
+  font-size: 84px;
+  line-height: 1;
+  color: #0b5ed7;
+}
+
+.elementor-widget-wcounterw .witr_contx {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+}
+
+.elementor-widget-wcounterw .witr_contx .counter,
+.elementor-widget-wcounterw .witr_contx h3 {
+  margin: 0;
+  color: #0b5ed7;
+  font-size: clamp(32px, 2.7vw, 58px);
+  line-height: 1.1;
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  font-variant-numeric: tabular-nums;
+}
+
+.elementor-widget-wcounterw .witr_contx span {
+  display: inline-block;
+  margin: 0;
+  color: #0b5ed7;
+  font-size: clamp(30px, 2.3vw, 48px);
+  line-height: 1;
+  font-weight: 500;
+}
+
+.elementor-widget-wcounterw .witr_contx h2 {
+  margin: 18px 0 0;
+  color: #1a1a1a;
+  font-size: clamp(22px, 1.6vw, 34px);
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+.elementor-element[data-id] {
+  min-width: 0;
+}
+
 @media (width < 900px) {
   .counters {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -61,6 +134,10 @@
   }
 
   .counter {
+    min-height: 240px;
+  }
+
+  .elementor-widget-wcounterw .witr_counter_single {
     min-height: 240px;
   }
 }
@@ -71,6 +148,10 @@
   }
 
   .counter {
+    min-height: 200px;
+  }
+
+  .elementor-widget-wcounterw .witr_counter_single {
     min-height: 200px;
   }
 }
