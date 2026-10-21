@@ -1,54 +1,99 @@
-import { icon, carouselControls } from '../../scripts/technowp.js';
-
 export default function decorate(block) {
   const track = document.createElement('div');
   track.className = 'testimonials-track';
-  track.tabIndex = 0;
-  track.setAttribute('role', 'region');
-  track.setAttribute('aria-label', 'Customer testimonials');
 
   [...block.children].forEach((row) => {
     const [avatarCell, whoCell, saidCell] = [...row.children];
-    const card = document.createElement('figure');
+    const card = document.createElement('article');
     card.className = 'testimonial';
+
+    const header = document.createElement('div');
+    header.className = 'testimonial-header';
+
+    const avatarWrap = document.createElement('div');
+    avatarWrap.className = 'testimonial-avatar';
+
+    const avatar = avatarCell?.querySelector('picture, img');
+    if (avatar) {
+      avatarWrap.append(avatar.cloneNode(true));
+    } else {
+      const fallback = document.createElement('span');
+      fallback.className = 'testimonial-avatar-fallback';
+      fallback.textContent = 'A';
+      avatarWrap.append(fallback);
+    }
+
+    const meta = document.createElement('div');
+    meta.className = 'testimonial-meta';
+
+    const whoItems = whoCell ? [...whoCell.children].filter((el) => el.textContent.trim()) : [];
+
+    if (whoItems.length > 0) {
+      const [primaryNode, secondaryNode] = whoItems;
+      const name = document.createElement('h3');
+      name.className = 'testimonial-name';
+      name.textContent = primaryNode.textContent.trim();
+      meta.append(name);
+
+      if (secondaryNode) {
+        const role = document.createElement('div');
+        role.className = 'testimonial-role';
+        role.textContent = secondaryNode.textContent.trim();
+        meta.append(role);
+      }
+    } else if (whoCell) {
+      const text = whoCell.textContent.trim();
+      const parts = text.split(/\s*\n\s*|\s*\/\s*|\s{2,}/).filter(Boolean);
+      const [first, second] = parts;
+
+      if (first) {
+        const name = document.createElement('h3');
+        name.className = 'testimonial-name';
+        name.textContent = first;
+        meta.append(name);
+      }
+
+      if (second) {
+        const role = document.createElement('div');
+        role.className = 'testimonial-role';
+        role.textContent = second;
+        meta.append(role);
+      }
+    }
+
+    header.append(avatarWrap, meta);
 
     const stars = document.createElement('div');
     stars.className = 'testimonial-stars';
     stars.setAttribute('role', 'img');
     stars.setAttribute('aria-label', '5 out of 5 stars');
-    for (let i = 0; i < 5; i += 1) stars.append(icon('star'));
-
-    const paragraphs = saidCell ? [...saidCell.querySelectorAll('p')] : [];
-    const quoteText = paragraphs.length > 1 ? paragraphs.slice(1) : paragraphs;
-    const headline = paragraphs.length > 1 ? paragraphs[0].textContent.trim() : '';
+    for (let i = 0; i < 5; i += 1) {
+      const star = document.createElement('span');
+      star.className = 'testimonial-star';
+      star.textContent = '★';
+      stars.append(star);
+    }
 
     const quote = document.createElement('blockquote');
-    if (headline) {
-      const h = document.createElement('p');
-      h.className = 'testimonial-headline';
-      h.textContent = headline;
-      quote.append(h);
-    }
-    quoteText.forEach((p) => quote.append(p));
+    quote.className = 'testimonial-quote';
 
-    const person = document.createElement('figcaption');
-    const avatar = avatarCell?.querySelector('picture');
-    if (avatar) {
-      const wrap = document.createElement('div');
-      wrap.className = 'testimonial-avatar';
-      wrap.append(avatar);
-      person.append(wrap);
+    const paragraphs = saidCell ? [...saidCell.querySelectorAll('p')] : [];
+    if (paragraphs.length) {
+      paragraphs.forEach((p) => {
+        const quoteText = document.createElement('p');
+        quoteText.textContent = p.textContent.trim();
+        quote.append(quoteText);
+      });
+    } else if (saidCell) {
+      const fallback = document.createElement('p');
+      fallback.textContent = saidCell.textContent.trim();
+      quote.append(fallback);
     }
-    const who = document.createElement('div');
-    who.className = 'testimonial-who';
-    who.append(...(whoCell ? whoCell.childNodes : []));
-    person.append(who);
 
-    const mark = icon('quote', 'testimonial-mark');
-    card.append(mark, stars, quote, person);
+    card.append(header, stars, quote);
     track.append(card);
   });
 
   block.textContent = '';
-  block.append(track, carouselControls(track));
+  block.append(track);
 }
