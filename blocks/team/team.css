@@ -1,0 +1,93 @@
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.team-member {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--tw-line);
+  border-radius: var(--tw-radius);
+  background: #fff;
+}
+
+.team-photo {
+  background: var(--tw-soft);
+}
+
+.team-photo picture,
+.team-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  object-position: top;
+}
+
+.team-body {
+  padding: 28px 24px 28px;
+  text-align: center;
+}
+
+.team-body h3 {
+  margin: 0 0 2px;
+  font-size: 22px;
+}
+
+/* role is the first paragraph, bio the second */
+.team-body p {
+  margin: 0 0 16px;
+  color: var(--tw-muted);
+  font-size: 15px;
+}
+
+.team-body h3 + p {
+  margin-bottom: 8px;
+  color: var(--tw-primary);
+  font-weight: 600;
+}
+
+.team-social {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.team-social li { margin: 0; }
+
+.team-social a {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--tw-soft);
+  color: var(--tw-navy);
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.team-social a:hover {
+  background: var(--tw-primary);
+  color: #fff;
+}
+
+.team-social .tw-icon {
+  width: 17px;
+  height: 17px;
+}
+
+@media (width < 900px) {
+  .team-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (width < 560px) {
+  .team-grid { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
+}
