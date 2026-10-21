@@ -1,0 +1,120 @@
+.portfolio-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+.portfolio-tabs button {
+  margin: 0;
+  padding: 10px 24px;
+  border: 1px solid var(--tw-line);
+  border-radius: var(--tw-radius);
+  background: #fff;
+  color: var(--tw-navy);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.portfolio-tabs button:hover {
+  border-color: var(--tw-primary);
+  background: var(--tw-soft);
+}
+
+.portfolio-tabs button[aria-pressed='true'] {
+  border-color: var(--tw-primary);
+  background: var(--tw-primary);
+  color: #fff;
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.portfolio-item { margin: 0; }
+.portfolio-item[hidden] { display: none; }
+
+.portfolio-item figure {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--tw-radius);
+  background: var(--tw-navy);
+}
+
+.portfolio-item picture,
+.portfolio-item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.portfolio-item img { transition: transform 0.5s, opacity 0.3s; }
+
+.portfolio-item figcaption {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 56px 24px 22px;
+  background: linear-gradient(to top, rgba(12 26 58 / 94%), rgba(12 26 58 / 0%));
+  color: rgba(255 255 255 / 80%);
+  font-size: 14px;
+}
+
+.portfolio-item h3 {
+  margin: 0 0 4px;
+  font-size: 20px;
+}
+
+.portfolio-link:any-link {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* stretched link: the caption is positioned, so extend past it; the figure clips the overflow */
+.portfolio-link::after {
+  content: '';
+  position: absolute;
+  inset: -9999px;
+}
+
+.portfolio-item figcaption p { margin: 0; }
+
+/* on devices with hover the caption slides in; touch devices always show it */
+@media (hover: hover) {
+  .portfolio-item figcaption {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.25s, transform 0.25s;
+  }
+
+  .portfolio-item:hover figcaption,
+  .portfolio-item:focus-within figcaption {
+    opacity: 1;
+    transform: none;
+  }
+
+  .portfolio-item:hover img { transform: scale(1.06); }
+}
+
+@media (width < 900px) {
+  .portfolio-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (width < 560px) {
+  .portfolio-grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-item img,
+  .portfolio-item figcaption { transition: none; }
+}

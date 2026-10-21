@@ -1,0 +1,67 @@
+const ALL_LABEL = 'All Work';
+
+export default function decorate(block) {
+  const items = [...block.children].map((row) => {
+    const [mediaCell, titleCell, catCell] = [...row.children];
+    return {
+      picture: mediaCell?.querySelector('picture'),
+      link: titleCell?.querySelector('a'),
+      title: titleCell?.textContent.trim() || '',
+      cats: (catCell?.textContent || '').split(',').map((c) => c.trim()).filter(Boolean),
+    };
+  });
+
+  const categories = [...new Set(items.flatMap((i) => i.cats))];
+
+  const tabs = document.createElement('div');
+  tabs.className = 'portfolio-tabs';
+  tabs.setAttribute('role', 'group');
+  tabs.setAttribute('aria-label', 'Filter by category');
+
+  const grid = document.createElement('ul');
+  grid.className = 'portfolio-grid';
+
+  const cards = items.map((item) => {
+    const li = document.createElement('li');
+    li.className = 'portfolio-item';
+    li.dataset.cats = item.cats.join('|');
+
+    const figure = document.createElement('figure');
+    if (item.picture) figure.append(item.picture);
+
+    const caption = document.createElement('figcaption');
+    const h3 = document.createElement('h3');
+    if (item.link) {
+      item.link.className = 'portfolio-link';
+      h3.append(item.link);
+    } else {
+      h3.textContent = item.title;
+    }
+    const meta = document.createElement('p');
+    meta.textContent = item.cats.join(', ');
+    caption.append(h3, meta);
+
+    figure.append(caption);
+    li.append(figure);
+    grid.append(li);
+    return li;
+  });
+
+  const buttons = [ALL_LABEL, ...categories].map((label, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = label;
+    b.setAttribute('aria-pressed', String(i === 0));
+    b.addEventListener('click', () => {
+      buttons.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      cards.forEach((card) => {
+        card.hidden = i !== 0 && !card.dataset.cats.split('|').includes(label);
+      });
+    });
+    tabs.append(b);
+    return b;
+  });
+
+  block.textContent = '';
+  block.append(tabs, grid);
+}
