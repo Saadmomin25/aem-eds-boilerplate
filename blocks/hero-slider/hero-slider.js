@@ -32,6 +32,27 @@ function markSocial(container) {
   });
 }
 
+/** Turn paragraphs made only of links into styled buttons (handles several links in one <p>). */
+function decorateCtas(content) {
+  content.querySelectorAll('p').forEach((p) => {
+    if (p.querySelector('.icon')) return; // social row, skip
+    const links = [...p.querySelectorAll('a')];
+    if (!links.length) return;
+    const strip = (s) => s.replace(/\s/g, '');
+    if (strip(p.textContent) !== strip(links.map((a) => a.textContent).join(''))) return;
+
+    const wrappers = links.map((a) => {
+      const secondary = !!a.closest('em');
+      a.className = secondary ? 'button secondary' : 'button';
+      const wrap = document.createElement('p');
+      wrap.className = 'button-container';
+      wrap.append(a);
+      return wrap;
+    });
+    p.replaceWith(...wrappers);
+  });
+}
+
 export default function decorate(block) {
   const rows = [...block.children];
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -66,6 +87,7 @@ export default function decorate(block) {
     if (content) {
       mergeHeading(content, i === 0 ? 1 : 2);
       markSocial(content);
+      decorateCtas(content);
       inner.append(...content.childNodes);
     }
     slide.append(inner);
