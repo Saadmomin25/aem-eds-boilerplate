@@ -1,10 +1,8 @@
 export default function decorate(block) {
   const rows = [...block.children];
 
-  block.textContent = '';
-
-  const wrapper = document.createElement('div');
-  wrapper.className = 'super-gallery-wrapper';
+  const grid = document.createElement('div');
+  grid.className = 'super-gallery-grid';
 
   rows.forEach((row) => {
     const cols = [...row.children];
@@ -13,7 +11,9 @@ export default function decorate(block) {
       return;
     }
 
-    const [imageCol, titleCol, categoryCol] = cols;
+    const imageCol = cols[0];
+    const titleCol = cols[1];
+    const categoryCol = cols[2];
 
     const card = document.createElement('div');
     card.className = 'super-gallery-card';
@@ -41,8 +41,9 @@ export default function decorate(block) {
     card.append(imageWrapper);
     card.append(content);
 
-    wrapper.append(card);
+    grid.append(card);
   });
 
-  block.append(wrapper);
+  block.innerHTML = '';
+  block.append(grid);
 }
