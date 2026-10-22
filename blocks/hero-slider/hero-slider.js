@@ -1,10 +1,12 @@
-import { icon } from '../../scripts/technowp.js';
+const ARROW_SVG = {
+  left: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>',
+  right: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>',
+};
 
-/** Merge <h2>line one</h2><h3>line two</h3> into one heading (h1 on the first slide). */
+/** Merge the first two headings (h1/h2/h3) into one heading with two lines. */
 function mergeHeading(content, level) {
-  const first = content.querySelector('h2, h1');
+  const [first, second] = content.querySelectorAll('h1, h2, h3');
   if (!first) return;
-  const second = content.querySelector('h3');
   const heading = document.createElement(`h${level}`);
   heading.className = 'hero-title';
   const top = document.createElement('span');
@@ -19,6 +21,15 @@ function mergeHeading(content, level) {
     second.remove();
   }
   first.replaceWith(heading);
+}
+
+/** A paragraph that only holds icons (or links wrapping icons) becomes the social row. */
+function markSocial(container) {
+  container.querySelectorAll('p').forEach((p) => {
+    if (p.querySelector('.icon') && !p.textContent.trim()) {
+      p.classList.add('social-links');
+    }
+  });
 }
 
 export default function decorate(block) {
@@ -52,8 +63,11 @@ export default function decorate(block) {
 
     const inner = document.createElement('div');
     inner.className = 'hero-content';
-    mergeHeading(content, i === 0 ? 1 : 2);
-    inner.append(...content.childNodes);
+    if (content) {
+      mergeHeading(content, i === 0 ? 1 : 2);
+      markSocial(content);
+      inner.append(...content.childNodes);
+    }
     slide.append(inner);
     track.append(slide);
     return slide;
@@ -88,7 +102,7 @@ export default function decorate(block) {
       b.type = 'button';
       b.className = 'hero-arrow';
       b.setAttribute('aria-label', dir < 0 ? 'Previous slide' : 'Next slide');
-      b.append(icon(dir < 0 ? 'arrow-left' : 'arrow-right'));
+      b.innerHTML = dir < 0 ? ARROW_SVG.left : ARROW_SVG.right;
       b.addEventListener('click', () => show(current + dir));
       return b;
     };
