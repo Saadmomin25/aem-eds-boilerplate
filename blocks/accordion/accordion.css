@@ -23,6 +23,7 @@
   line-height: inherit;
 }
 
+/* resets the global button look from styles.css, then styles the header bar */
 .accordion .accordion-trigger {
   display: flex;
   align-items: center;
@@ -55,6 +56,7 @@
   outline-offset: -3px;
 }
 
+/* open state: blue bar with white text (declared after :hover so it wins) */
 .accordion .accordion-trigger[aria-expanded='true'] {
   background: var(--acc-blue);
   color: #fff;
@@ -62,6 +64,7 @@
 
 .accordion .accordion-trigger[aria-expanded='true']:focus-visible { outline-color: #fff; }
 
+/* chevron: points down when closed, up when open */
 .accordion .accordion-chevron {
   flex: none;
   width: 14px;
@@ -78,6 +81,7 @@
   transform: rotate(-135deg);
 }
 
+/* smooth height animation without measuring in JS */
 .accordion .accordion-panel {
   display: grid;
   grid-template-rows: 0fr;
@@ -123,4 +127,36 @@
   .accordion .is-open > .accordion-panel,
   .accordion .accordion-chevron,
   .accordion .accordion-trigger { transition: none; }
+}
+
+/* ---- variant: Accordion (outline) – compact white bars with a thin border ---- */
+.accordion.outline { gap: 12px; }
+
+.accordion.outline .accordion-item { border-radius: 3px; }
+
+.accordion.outline .accordion-trigger {
+  padding: 13px 20px;
+  background: #fff;
+  font-size: 16px;
+}
+
+.accordion.outline .accordion-trigger:hover { background: #f4f7fd; }
+
+.accordion.outline .accordion-trigger[aria-expanded='true'] {
+  background: var(--acc-blue);
+  color: #fff;
+}
+
+.accordion.outline .accordion-chevron {
+  width: 9px;
+  height: 9px;
+  margin: -4px 2px 0 0;
+}
+
+.accordion.outline .accordion-trigger[aria-expanded='true'] .accordion-chevron { margin-top: 4px; }
+
+.accordion.outline .accordion-body {
+  padding: 14px 20px 16px;
+  font-size: 15px;
+  line-height: 1.6;
 }
