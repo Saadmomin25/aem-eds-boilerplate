@@ -1,6 +1,7 @@
 export default async function decorate(block) {
   const data = {};
 
+  // Parse block table
   [...block.children].forEach((row) => {
     const cols = [...row.children];
 
@@ -13,30 +14,30 @@ export default async function decorate(block) {
   const getValue = (key) => data[key]?.textContent.trim() || '';
 
   const logoMarkup =
-    data.logo?.querySelector('picture')?.outerHTML
-    || data.logo?.querySelector('img')?.outerHTML
-    || data.logo?.innerHTML
-    || '';
+    data.logo?.querySelector('picture')?.outerHTML ||
+    data.logo?.querySelector('img')?.outerHTML ||
+    data.logo?.innerHTML ||
+    '';
+
+  const navPath = getValue('nav') || '/technonav';
 
   block.innerHTML = `
     <header class="technowp-header">
 
       <div class="technowp-topbar">
-
         <div class="technowp-topbar-left">
-          <span>📍 ${getValue('location')}</span>
-          <span>📞 ${getValue('phone')}</span>
-          <span>✉️ ${getValue('email')}</span>
+          <span class="top-item">📍 ${getValue('location')}</span>
+          <span class="top-item">📞 ${getValue('phone')}</span>
+          <span class="top-item">✉️ ${getValue('email')}</span>
         </div>
 
         <div class="technowp-topbar-right">
-          <span>🕒 ${getValue('hours')}</span>
+          <span class="top-item">🕒 ${getValue('hours')}</span>
 
           <a href="#" aria-label="Facebook">f</a>
           <a href="#" aria-label="Twitter">𝕏</a>
           <a href="#" aria-label="Instagram">◎</a>
         </div>
-
       </div>
 
       <div class="technowp-navbar">
@@ -59,21 +60,20 @@ export default async function decorate(block) {
         </nav>
 
         <div class="technowp-actions">
-
           <button
             class="search-btn"
             aria-label="Search"
+            type="button"
           >
             🔍
           </button>
 
           <a
-            class="quote-btn"
             href="${getValue('button-link') || '#'}"
+            class="quote-btn"
           >
             ${getValue('button-label') || 'Get Quotes'}
           </a>
-
         </div>
 
       </div>
@@ -81,37 +81,38 @@ export default async function decorate(block) {
     </header>
   `;
 
-  const navPath = getValue('nav') || '/nav';
-
+  // Load navigation fragment
   try {
     const response = await fetch(`${navPath}.plain.html`);
 
-    if (response.ok) {
-      const html = await response.text();
-
-      const temp = document.createElement('div');
-      temp.innerHTML = html;
-
-      const navList = block.querySelector('.technowp-nav-list');
-
-      const links = [...temp.querySelectorAll('a')];
-
-      navList.innerHTML = links
-        .map(
-          (link) => `
-            <li>
-              <a href="${link.getAttribute('href')}">
-                ${link.textContent.trim()}
-              </a>
-            </li>
-          `,
-        )
-        .join('');
+    if (!response.ok) {
+      throw new Error(`Unable to load ${navPath}`);
     }
+
+    const html = await response.text();
+
+    const temp = document.createElement('div');
+    temp.innerHTML = html;
+
+    const navList = block.querySelector('.technowp-nav-list');
+    const links = [...temp.querySelectorAll('a')];
+
+    navList.innerHTML = links
+      .map(
+        (link) => `
+          <li>
+            <a href="${link.getAttribute('href')}">
+              ${link.textContent.trim()}
+            </a>
+          </li>
+        `,
+      )
+      .join('');
   } catch (error) {
-    console.error('Error loading navigation fragment', error);
+    console.error('Navigation loading failed:', error);
   }
 
+  // Mobile menu
   const menuToggle = block.querySelector('.technowp-menu-toggle');
   const nav = block.querySelector('.technowp-nav');
 
