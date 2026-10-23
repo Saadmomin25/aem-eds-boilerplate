@@ -3,11 +3,27 @@
   max-width: 100%;
 }
 
+.techno-header-wrapper {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Override EDS container */
+.section.techno-header-container {
+  max-width: 100%;
+  padding: 0;
+}
+
+.section.techno-header-container .default-content-wrapper,
+.section.techno-header-container .techno-header-wrapper {
+  max-width: 100%;
+}
+
+/* HEADER */
+
 .technowp-header {
   width: 100%;
   background: #fff;
-  position: relative;
-  z-index: 100;
 }
 
 /* TOP BAR */
@@ -15,18 +31,20 @@
 .technowp-topbar {
   background: #0d5be1;
   color: #fff;
-  min-height: 60px;
-  padding: 0 40px;
+  min-height: 70px;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  padding: 0 40px;
 }
 
 .technowp-topbar-left,
 .technowp-topbar-right {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 32px;
 }
 
 .technowp-topbar span,
@@ -40,25 +58,36 @@
 /* NAVBAR */
 
 .technowp-navbar {
-  height: 110px;
-  padding: 0 50px;
-  background: #fff;
+  min-height: 120px;
+
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  box-shadow: 0 8px 20px rgb(0 0 0 / 8%);
+
+  padding: 0 40px;
+
+  background: #fff;
+
+  box-shadow: 0 2px 15px rgb(0 0 0 / 8%);
 }
 
+/* LOGO */
+
 .technowp-logo {
-  flex: 0 0 auto;
+  flex: 0 0 280px;
+}
+
+.technowp-logo a {
+  display: flex;
+  align-items: center;
 }
 
 .technowp-logo img,
 .technowp-logo picture img {
-  max-height: 75px;
+  max-height: 80px;
   width: auto;
-  display: block;
 }
+
+/* NAVIGATION */
 
 .technowp-nav {
   flex: 1;
@@ -67,10 +96,11 @@
 }
 
 .technowp-nav-list {
-  list-style: none;
   display: flex;
   align-items: center;
-  gap: 42px;
+  gap: 50px;
+
+  list-style: none;
   margin: 0;
   padding: 0;
 }
@@ -83,23 +113,25 @@
   text-decoration: none;
   color: #222;
   font-size: 18px;
-  font-weight: 600;
-  transition: color .3s ease;
+  font-weight: 700;
 }
 
 .technowp-nav-list a:hover {
   color: #0d5be1;
 }
 
+/* ACTIONS */
+
 .technowp-actions {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 30px;
 }
 
 .search-btn {
-  border: 0;
+  border: none;
   background: transparent;
+
   cursor: pointer;
   font-size: 28px;
 }
@@ -107,11 +139,15 @@
 .quote-btn {
   background: #0d5be1;
   color: #fff;
+
   text-decoration: none;
-  padding: 18px 36px;
+
+  padding: 18px 40px;
   border-radius: 8px;
+
   font-size: 18px;
   font-weight: 600;
+
   white-space: nowrap;
 }
 
@@ -119,63 +155,46 @@
   background: #084bc0;
 }
 
-.technowp-menu-toggle {
-  display: none;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  font-size: 28px;
+/* TABLET */
+
+@media (max-width: 1200px) {
+  .technowp-nav-list {
+    gap: 25px;
+  }
 }
 
 /* MOBILE */
 
 @media (max-width: 991px) {
+
   .technowp-topbar {
     display: none;
   }
 
-  .technowp-menu-toggle {
-    display: block;
+  .technowp-navbar {
+    flex-wrap: wrap;
+    min-height: auto;
+    padding: 20px;
   }
 
-  .technowp-navbar {
-    height: 80px;
-    padding: 0 20px;
+  .technowp-logo {
+    flex: 0 0 auto;
   }
 
   .technowp-nav {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
     width: 100%;
-    background: #fff;
-    box-shadow: 0 8px 20px rgb(0 0 0 / 10%);
-  }
-
-  .technowp-nav.active {
-    display: block;
+    order: 3;
+    justify-content: flex-start;
+    margin-top: 20px;
   }
 
   .technowp-nav-list {
     flex-direction: column;
-    gap: 0;
+    align-items: flex-start;
+    gap: 15px;
   }
 
-  .technowp-nav-list a {
-    display: block;
-    padding: 16px 24px;
-  }
-}
-
-@media (max-width: 768px) {
-  .search-btn,
   .quote-btn {
-    display: none;
-  }
-
-  .technowp-logo img,
-  .technowp-logo picture img {
-    max-height: 60px;
+    padding: 14px 24px;
   }
 }
