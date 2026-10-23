@@ -12,7 +12,7 @@ export default function decorate(block) {
 
   const getValue = (key) => data[key]?.textContent.trim() || '';
 
-  const logoMarkup =
+  const logo =
     data.logo?.querySelector('picture')?.outerHTML ||
     data.logo?.querySelector('img')?.outerHTML ||
     data.logo?.innerHTML ||
@@ -23,8 +23,8 @@ export default function decorate(block) {
 
       <div class="technowp-topbar">
         <div class="technowp-topbar-left">
-          <span>📍 ${getValue('location')}</span>
-          <span>📞 ${getValue('phone')}</span>
+          <span>🏠 ${getValue('location')}</span>
+          <span>📱 ${getValue('phone')}</span>
           <span>✉️ ${getValue('email')}</span>
         </div>
 
@@ -41,7 +41,7 @@ export default function decorate(block) {
 
         <div class="technowp-logo">
           <a href="/">
-            ${logoMarkup}
+            ${logo}
           </a>
         </div>
 
@@ -57,7 +57,6 @@ export default function decorate(block) {
         </nav>
 
         <div class="technowp-actions">
-
           <button
             class="search-btn"
             type="button"
@@ -70,25 +69,10 @@ export default function decorate(block) {
             class="quote-btn">
             ${getValue('button-label') || 'Get Quotes'}
           </a>
-
         </div>
-
-        <button
-          class="technowp-menu-toggle"
-          type="button"
-          aria-label="Toggle Menu">
-          ☰
-        </button>
 
       </div>
 
     </header>
   `;
-
-  const menuButton = block.querySelector('.technowp-menu-toggle');
-  const nav = block.querySelector('.technowp-nav');
-
-  menuButton?.addEventListener('click', () => {
-    nav.classList.toggle('active');
-  });
 }
