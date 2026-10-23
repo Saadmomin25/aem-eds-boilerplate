@@ -1,24 +1,31 @@
 .block.techno-header {
-  padding: 0;
   max-width: 100%;
+  padding: 0;
+}
+
+.techno-header-wrapper {
+  width: 100%;
 }
 
 .technowp-header {
   width: 100%;
+  background: #fff;
   position: relative;
-  z-index: 50;
+  z-index: 100;
 }
 
-/* TOP BAR */
+/* =====================================
+   TOP BAR
+===================================== */
 
 .technowp-topbar {
-  height: 72px;
+  height: 60px;
   background: #0d5be1;
   color: #fff;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 0 48px;
+  justify-content: space-between;
+  padding: 0 40px;
 }
 
 .technowp-topbar-left,
@@ -36,16 +43,18 @@
   font-weight: 500;
 }
 
-/* NAVBAR */
+/* =====================================
+   NAVBAR
+===================================== */
 
 .technowp-navbar {
+  height: 110px;
   background: #fff;
-  min-height: 120px;
-  padding: 0 48px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 8px 25px rgb(0 0 0 / 8%);
+  padding: 0 50px;
+  box-shadow: 0 5px 25px rgb(0 0 0 / 8%);
 }
 
 .technowp-logo {
@@ -53,17 +62,20 @@
 }
 
 .technowp-logo a {
-  display: block;
+  display: flex;
+  align-items: center;
 }
 
 .technowp-logo img,
 .technowp-logo picture img {
-  max-height: 80px;
-  width: auto;
   display: block;
+  max-height: 70px;
+  width: auto;
 }
 
-/* NAVIGATION */
+/* =====================================
+   NAVIGATION
+===================================== */
 
 .technowp-nav {
   flex: 1;
@@ -73,6 +85,7 @@
 
 .technowp-nav-list {
   display: flex;
+  align-items: center;
   gap: 42px;
   list-style: none;
   margin: 0;
@@ -84,54 +97,58 @@
 }
 
 .technowp-nav-list a {
+  color: #242424;
   text-decoration: none;
-  color: #222;
-  font-size: 19px;
+  font-size: 18px;
   font-weight: 600;
-  transition: color .3s ease;
+  transition: color 0.3s ease;
 }
 
 .technowp-nav-list a:hover {
   color: #0d5be1;
 }
 
-/* ACTIONS */
+/* =====================================
+   ACTIONS
+===================================== */
 
 .technowp-actions {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 25px;
 }
 
 .search-btn {
-  background: none;
   border: none;
+  background: transparent;
   cursor: pointer;
-  font-size: 28px;
+  font-size: 24px;
 }
 
 .quote-btn {
   background: #0d5be1;
   color: #fff;
   text-decoration: none;
+  padding: 16px 34px;
   border-radius: 8px;
-  padding: 18px 36px;
   font-size: 18px;
   font-weight: 600;
   white-space: nowrap;
 }
 
 .quote-btn:hover {
-  background: #084cbf;
+  background: #084ac1;
 }
 
-/* MOBILE */
+/* =====================================
+   MOBILE
+===================================== */
 
 .technowp-menu-toggle {
   display: none;
   border: none;
-  background: none;
-  font-size: 28px;
+  background: transparent;
+  font-size: 30px;
   cursor: pointer;
 }
 
@@ -146,7 +163,7 @@
   }
 
   .technowp-navbar {
-    min-height: 80px;
+    height: 85px;
     padding: 0 20px;
   }
 
@@ -157,7 +174,7 @@
     left: 0;
     width: 100%;
     background: #fff;
-    box-shadow: 0 10px 25px rgb(0 0 0 / 12%);
+    box-shadow: 0 8px 20px rgb(0 0 0 / 10%);
   }
 
   .technowp-nav.active {
@@ -173,14 +190,17 @@
     display: block;
     padding: 16px 24px;
   }
+}
 
+@media (max-width: 768px) {
+
+  .quote-btn,
   .search-btn {
     display: none;
   }
-}
 
-@media (max-width: 767px) {
-  .quote-btn {
-    display: none;
+  .technowp-logo img,
+  .technowp-logo picture img {
+    max-height: 55px;
   }
 }
