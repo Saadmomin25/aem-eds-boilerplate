@@ -1,41 +1,56 @@
+/* =======================
+   BLOCK RESET
+======================= */
+
 .block.techno-header {
   padding: 0;
   max-width: 100%;
 }
 
-.techno-header-wrapper {
-  width: 100%;
-  max-width: 100%;
-}
-
-/* Override EDS container */
 .section.techno-header-container {
-  max-width: 100%;
-  padding: 0;
+  max-width: 100% !important;
+  padding: 0 !important;
 }
 
 .section.techno-header-container .default-content-wrapper,
 .section.techno-header-container .techno-header-wrapper {
-  max-width: 100%;
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
-/* HEADER */
+/* =======================
+   FIXED HEADER
+======================= */
 
 .technowp-header {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
+  z-index: 9999;
   background: #fff;
+  box-shadow: 0 2px 10px rgb(0 0 0 / 8%);
 }
 
-/* TOP BAR */
+/* Prevent page content hiding behind header */
+
+main {
+  padding-top: 180px;
+}
+
+/* =======================
+   TOP BAR
+======================= */
 
 .technowp-topbar {
   background: #0d5be1;
   color: #fff;
-  min-height: 70px;
+  min-height: 60px;
 
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 
   padding: 0 40px;
 }
@@ -44,7 +59,7 @@
 .technowp-topbar-right {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 28px;
 }
 
 .technowp-topbar span,
@@ -55,25 +70,30 @@
   font-weight: 500;
 }
 
-/* NAVBAR */
+/* =======================
+   NAVBAR
+======================= */
 
 .technowp-navbar {
   min-height: 120px;
+  padding: 0 40px;
 
   display: flex;
   align-items: center;
-
-  padding: 0 40px;
+  justify-content: space-between;
 
   background: #fff;
-
-  box-shadow: 0 2px 15px rgb(0 0 0 / 8%);
 }
 
-/* LOGO */
+/* =======================
+   LOGO
+======================= */
 
 .technowp-logo {
   flex: 0 0 280px;
+
+  display: flex;
+  align-items: center;
 }
 
 .technowp-logo a {
@@ -83,14 +103,23 @@
 
 .technowp-logo img,
 .technowp-logo picture img {
-  max-height: 80px;
   width: auto;
+  height: auto;
+
+  max-height: 80px;
+  max-width: 250px;
+
+  object-fit: contain;
+  display: block;
 }
 
-/* NAVIGATION */
+/* =======================
+   NAVIGATION
+======================= */
 
 .technowp-nav {
   flex: 1;
+
   display: flex;
   justify-content: center;
 }
@@ -98,11 +127,13 @@
 .technowp-nav-list {
   display: flex;
   align-items: center;
-  gap: 50px;
 
   list-style: none;
+
   margin: 0;
   padding: 0;
+
+  gap: 48px;
 }
 
 .technowp-nav-list li {
@@ -112,20 +143,27 @@
 .technowp-nav-list a {
   text-decoration: none;
   color: #222;
+
   font-size: 18px;
   font-weight: 700;
+
+  transition: color .3s ease;
 }
 
 .technowp-nav-list a:hover {
   color: #0d5be1;
 }
 
-/* ACTIONS */
+/* =======================
+   ACTIONS
+======================= */
 
 .technowp-actions {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 24px;
+
+  margin-left: auto;
 }
 
 .search-btn {
@@ -142,39 +180,73 @@
 
   text-decoration: none;
 
-  padding: 18px 40px;
+  padding: 18px 38px;
   border-radius: 8px;
 
   font-size: 18px;
   font-weight: 600;
 
   white-space: nowrap;
+
+  transition: background .3s ease;
 }
 
 .quote-btn:hover {
   background: #084bc0;
 }
 
-/* TABLET */
+/* =======================
+   MOBILE TOGGLE
+======================= */
+
+.technowp-menu-toggle {
+  display: none;
+
+  border: none;
+  background: transparent;
+
+  cursor: pointer;
+  font-size: 28px;
+}
+
+/* =======================
+   TABLET
+======================= */
 
 @media (max-width: 1200px) {
+
   .technowp-nav-list {
-    gap: 25px;
+    gap: 30px;
+  }
+
+  .technowp-nav-list a {
+    font-size: 16px;
   }
 }
 
-/* MOBILE */
+/* =======================
+   MOBILE
+======================= */
 
 @media (max-width: 991px) {
+
+  main {
+    padding-top: 120px;
+  }
 
   .technowp-topbar {
     display: none;
   }
 
+  .technowp-menu-toggle {
+    display: block;
+  }
+
   .technowp-navbar {
+    min-height: 80px;
+    padding: 0 20px;
+
     flex-wrap: wrap;
-    min-height: auto;
-    padding: 20px;
   }
 
   .technowp-logo {
@@ -182,19 +254,36 @@
   }
 
   .technowp-nav {
+    display: none;
+
+    position: absolute;
+    top: 100%;
+    left: 0;
+
     width: 100%;
-    order: 3;
-    justify-content: flex-start;
-    margin-top: 20px;
+    background: #fff;
+
+    box-shadow: 0 8px 20px rgb(0 0 0 / 10%);
+  }
+
+  .technowp-nav.active {
+    display: block;
   }
 
   .technowp-nav-list {
     flex-direction: column;
     align-items: flex-start;
-    gap: 15px;
+    gap: 0;
   }
 
+  .technowp-nav-list a {
+    display: block;
+    width: 100%;
+    padding: 16px 24px;
+  }
+
+  .search-btn,
   .quote-btn {
-    padding: 14px 24px;
+    display: none;
   }
 }
