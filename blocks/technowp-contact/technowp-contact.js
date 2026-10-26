@@ -3,80 +3,99 @@ export default function decorate(block) {
 
   const cards = [];
   let heading = 'Contact Us';
+  let buttonText = 'Submit Request';
 
   rows.forEach((row) => {
     const cols = [...row.children];
 
-    if (cols.length === 3) {
+    if (!cols.length) return;
+
+    const type = cols[0]?.textContent
+      .trim()
+      .toLowerCase();
+
+    if (type === 'contact-card') {
       cards.push({
-        type: cols[0]?.textContent.trim().toLowerCase(),
-        title: cols[1]?.textContent.trim(),
-        description: cols[2]?.innerHTML,
+        icon: cols[1]?.textContent.trim().toLowerCase(),
+        title: cols[2]?.textContent.trim(),
+        description: cols[3]?.innerHTML || '',
       });
     }
 
-    if (cols.length === 1) {
-      heading = cols[0].textContent.trim();
+    if (type === 'form-heading') {
+      heading = cols[1]?.textContent.trim() || heading;
+    }
+
+    if (type === 'button-text') {
+      buttonText = cols[1]?.textContent.trim() || buttonText;
     }
   });
 
-  const iconMap = {
-    location: '📍',
-    phone: '📱',
-    email: '✉️',
+  const icons = {
+    location: `
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 10.5A3.5 3.5 0 1 1 12 5.5a3.5 3.5 0 0 1 0 7z"/>
+      </svg>
+    `,
+    phone: `
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17 1H7C5.9 1 5 1.9 5 3v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zm0 17H7V4h10v14z"/>
+      </svg>
+    `,
+    email: `
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
+      </svg>
+    `,
   };
 
   block.innerHTML = `
-    <div class="technowp-contact-wrapper">
+    <div class="contact-info">
 
-      <div class="contact-info">
+      ${cards
+        .map(
+          (card) => `
+            <div class="contact-card">
 
-        ${cards.map((card) => `
-          <div class="contact-card">
+              <div class="contact-icon">
+                ${icons[card.icon] || icons.location}
+              </div>
 
-            <div class="contact-icon">
-              ${iconMap[card.type] || 'ℹ️'}
+              <div class="contact-content">
+                <h3>${card.title}</h3>
+                <div>${card.description}</div>
+              </div>
+
             </div>
+          `,
+        )
+        .join('')}
 
-            <div class="contact-content">
-              <h3>${card.title}</h3>
-              <p>${card.description}</p>
-            </div>
+    </div>
 
-          </div>
-        `).join('')}
+    <div class="contact-form-wrapper">
 
-      </div>
+      <h2>${heading}</h2>
 
-      <div class="contact-form-wrapper">
+      <form class="contact-form">
 
-        <h2>${heading}</h2>
+        <div class="field-group">
+          <input type="text" placeholder="Name" />
+          <input type="tel" placeholder="Phone" />
+        </div>
 
-        <form class="contact-form">
+        <div class="field-group">
+          <input type="email" placeholder="Email" />
+          <input type="text" placeholder="Subject" />
+        </div>
 
-          <div class="field-group">
-            <input type="text" placeholder="Name" required />
-            <input type="tel" placeholder="Phone" required />
-          </div>
+        <textarea rows="8" placeholder="Message"></textarea>
 
-          <div class="field-group">
-            <input type="email" placeholder="Email" required />
-            <input type="text" placeholder="Subject" />
-          </div>
+        <button type="submit">
+          ${buttonText}
+        </button>
 
-          <textarea
-            placeholder="Message"
-            rows="8"
-            required>
-          </textarea>
-
-          <button type="submit">
-            Submit Request
-          </button>
-
-        </form>
-
-      </div>
+      </form>
 
     </div>
   `;
