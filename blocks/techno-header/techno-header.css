@@ -1,289 +1,153 @@
-/* =======================
-   BLOCK RESET
- ======================= */
-
-.block.techno-header {
-  padding: 0;
-  max-width: 100%;
+.technowp-contact {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  gap: 40px;
+  padding: 80px 0;
+  align-items: flex-start;
 }
 
-.section.techno-header-container {
-  max-width: 100% !important;
-  padding: 0 !important;
+/* LEFT COLUMN */
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
 }
 
-.section.techno-header-container .default-content-wrapper,
-.section.techno-header-container .techno-header-wrapper {
-  max-width: 100% !important;
-  padding: 0 !important;
-  margin: 0 !important;
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  min-height: 170px;
+  background: #f8f8f8;
+  padding: 35px 30px;
+  box-sizing: border-box;
 }
 
-/* =======================
-   FIXED HEADER
- ======================= */
-
-.technowp-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 9999;
-  background: #fff;
-  box-shadow: 0 2px 10px rgb(0 0 0 / 8%);
-}
-
-/* Prevent page content hiding behind header */
-
-main {
-  padding-top: 25px;
-}
-
-/* =======================
-   TOP BAR
- ======================= */
-
-.technowp-topbar {
-  background: #0d5be1;
+.contact-icon {
+  width: 62px;
+  height: 62px;
+  min-width: 62px;
+  border-radius: 50%;
+  background: #0d6efd;
   color: #fff;
-  min-height: 60px;
-
   display: flex;
   align-items: center;
-  justify-content: space-between;
-
-  padding: 0 40px;
-}
-
-.technowp-topbar-left,
-.technowp-topbar-right {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-}
-
-.technowp-topbar span,
-.technowp-topbar a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: 500;
-}
-
-/* =======================
-    NAVBAR
- ======================= */
-
-.technowp-navbar {
-  min-height: 70px;
-  padding: 0 40px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  background: #fff;
-}
-
-/* =======================
-    LOGO
- ======================= */
-
-.technowp-logo {
-  flex: 0 0 280px;
-
-  display: flex;
-  align-items: center;
-}
-
-.technowp-logo a {
-  display: flex;
-  align-items: center;
-}
-
-.technowp-logo img,
-.technowp-logo picture img {
-  width: auto;
-  height: auto;
-
-  max-height: 80px;
-  max-width: 250px;
-
-  object-fit: contain;
-  display: block;
-}
-
-/* =======================
-    NAVIGATION
- ======================= */
-
-.technowp-nav {
-  flex: 1;
-
-  display: flex;
   justify-content: center;
 }
 
-.technowp-nav-list {
-  display: flex;
-  align-items: center;
-
-  list-style: none;
-
-  margin: 0;
-  padding: 0;
-
-  gap: 48px;
+.contact-icon svg {
+  width: 28px;
+  height: 28px;
 }
 
-.technowp-nav-list li {
-  margin: 0;
-}
-
-.technowp-nav-list a {
-  text-decoration: none;
+.contact-content h3 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  font-weight: 500;
   color: #222;
-
-  font-size: 18px;
-  font-weight: 700;
-
-  transition: color .3s ease;
 }
 
-.technowp-nav-list a:hover {
-  color: #0d5be1;
+.contact-content div {
+  color: #555;
+  line-height: 1.8;
 }
 
-/* =======================
-    ACTIONS
- ======================= */
+/* RIGHT COLUMN */
 
-.technowp-actions {
+.contact-form-wrapper h2 {
+  text-align: center;
+  font-size: 42px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #222;
+  margin: 0 0 40px;
+}
+
+.contact-form {
   display: flex;
-  align-items: center;
-  gap: 24px;
-
-  margin-left: auto;
+  flex-direction: column;
+  gap: 28px;
 }
 
-.search-btn {
-  border: none;
-  background: transparent;
-
-  cursor: pointer;
-  font-size: 28px;
+.field-group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
 }
 
-.quote-btn {
-  background: #0d5be1;
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 3px;
+  padding: 20px;
+  font-size: 16px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.contact-form input {
+  height: 68px;
+}
+
+.contact-form textarea {
+  min-height: 170px;
+  resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #0d6efd;
+}
+
+.contact-form button {
+  width: 100%;
+  height: 65px;
+  border: 0;
+  background: #0d6efd;
   color: #fff;
-
-  text-decoration: none;
-
-  padding: 18px 38px;
-  border-radius: 8px;
-
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 600;
-
-  white-space: nowrap;
-
-  transition: background .3s ease;
-}
-
-.quote-btn:hover {
-  background: #084bc0;
-}
-
-/* =======================
-    MOBILE TOGGLE
- ======================= */
-
-.technowp-menu-toggle {
-  display: none;
-
-  border: none;
-  background: transparent;
-
   cursor: pointer;
-  font-size: 28px;
+  transition: background 0.3s ease;
 }
 
-/* =======================
-    TABLET
- ======================= */
-
-@media (max-width: 1200px) {
-
-  .technowp-nav-list {
-    gap: 30px;
-  }
-
-  .technowp-nav-list a {
-    font-size: 16px;
-  }
+.contact-form button:hover {
+  background: #0956d9;
 }
 
-/* =======================
-    MOBILE
- ======================= */
+/* TABLET */
 
 @media (max-width: 991px) {
-
-  main {
-    padding-top: 120px;
+  .technowp-contact {
+    grid-template-columns: 1fr;
   }
 
-  .technowp-topbar {
-    display: none;
+  .contact-form-wrapper h2 {
+    font-size: 34px;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 767px) {
+  .field-group {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 
-  .technowp-menu-toggle {
-    display: block;
+  .contact-card {
+    padding: 25px;
+    min-height: auto;
   }
 
-  .technowp-navbar {
-    min-height: 80px;
-    padding: 0 20px;
-
-    flex-wrap: wrap;
+  .contact-form-wrapper h2 {
+    font-size: 28px;
   }
 
-  .technowp-logo {
-    flex: 0 0 auto;
-  }
-
-  .technowp-nav {
-    display: none;
-
-    position: absolute;
-    top: 100%;
-    left: 0;
-
-    width: 100%;
-    background: #fff;
-
-    box-shadow: 0 8px 20px rgb(0 0 0 / 10%);
-  }
-
-  .technowp-nav.active {
-    display: block;
-  }
-
-  .technowp-nav-list {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0;
-  }
-
-  .technowp-nav-list a {
-    display: block;
-    width: 100%;
-    padding: 16px 24px;
-  }
-
-  .search-btn,
-  .quote-btn {
-    display: none;
+  .contact-form button {
+    font-size: 18px;
   }
 }
