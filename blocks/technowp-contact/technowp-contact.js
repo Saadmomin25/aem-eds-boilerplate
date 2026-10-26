@@ -10,15 +10,20 @@ export default function decorate(block) {
 
     if (!cols.length) return;
 
-    const type = cols[0]?.textContent
-      .trim()
-      .toLowerCase();
+    const type = cols[0]?.textContent.trim().toLowerCase();
 
     if (type === 'contact-card') {
+      let description = cols[3]?.innerHTML || '';
+
+      // Convert escaped BR tags into actual line breaks
+      description = description
+        .replace(/&lt;br&gt;/gi, '<br>')
+        .replace(/<br>/gi, '<br>');
+
       cards.push({
         icon: cols[1]?.textContent.trim().toLowerCase(),
         title: cols[2]?.textContent.trim(),
-        description: cols[3]?.innerHTML || '',
+        description,
       });
     }
 
@@ -52,24 +57,22 @@ export default function decorate(block) {
   block.innerHTML = `
     <div class="contact-info">
 
-      ${cards
-        .map(
-          (card) => `
-            <div class="contact-card">
+      ${cards.map((card) => `
+        <div class="contact-card">
 
-              <div class="contact-icon">
-                ${icons[card.icon] || icons.location}
-              </div>
+          <div class="contact-icon">
+            ${icons[card.icon]}
+          </div>
 
-              <div class="contact-content">
-                <h3>${card.title}</h3>
-                <div>${card.description}</div>
-              </div>
-
+          <div class="contact-content">
+            <h3>${card.title}</h3>
+            <div class="contact-description">
+              ${card.description}
             </div>
-          `,
-        )
-        .join('')}
+          </div>
+
+        </div>
+      `).join('')}
 
     </div>
 
@@ -80,13 +83,13 @@ export default function decorate(block) {
       <form class="contact-form">
 
         <div class="field-group">
-          <input type="text" placeholder="Name" />
-          <input type="tel" placeholder="Phone" />
+          <input type="text" placeholder="Name">
+          <input type="tel" placeholder="Phone">
         </div>
 
         <div class="field-group">
-          <input type="email" placeholder="Email" />
-          <input type="text" placeholder="Subject" />
+          <input type="email" placeholder="Email">
+          <input type="text" placeholder="Subject">
         </div>
 
         <textarea rows="8" placeholder="Message"></textarea>
